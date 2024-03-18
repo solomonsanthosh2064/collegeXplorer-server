@@ -29,8 +29,23 @@ const createNotes = async (req, res) => {
 		throw error
 	}
 }
+const getNotesByClass = async (req,res) => {
+	
+	try {
+		let classs = req.params.class
+		const notes = await Notes.find({
+			className: classs,
+		}).populate("teacherId")
+		res.json(notes)
+	} catch (error) {
+		console.error("Error retrieving notes:", error)
+		throw error
+	}
+}
+
 
 module.exports = {
     getNotesByTeacherId,
-	createNotes
+	createNotes,
+	getNotesByClass
 }
