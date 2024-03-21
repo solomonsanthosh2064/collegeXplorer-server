@@ -7,6 +7,7 @@ const {
 	getAllOrdersForUser,
 	updateOrder,
 	deleteOrder,
+	updateStatusOrder
 } = require("../controllers/OrderController")
 
 // Create a new order
@@ -20,9 +21,10 @@ router.get("/order/:shopId", getAllOrdersForShop)
 
 router.get("/order/user/:userId", getAllOrdersForUser)
 
-
 // Update a order by ID
 router.put("/order/update/:id", updateOrder)
+
+router.put("/order/update/status/:id", updateStatusOrder)
 
 // Delete a order by ID
 router.delete("/order/delete/:id", deleteOrder)

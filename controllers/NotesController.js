@@ -2,7 +2,7 @@ const Notes = require("../modals/notes")
 
 const getNotesByTeacherId = async (req, res) => {
 	try {
-        let teacherId = req.params.teacherId
+		let teacherId = req.params.teacherId
 		const notes = await Notes.find({
 			teacherId: teacherId,
 		}).populate("teacherId")
@@ -15,11 +15,11 @@ const getNotesByTeacherId = async (req, res) => {
 
 const createNotes = async (req, res) => {
 	try {
-		const { teacherId, title, className, notes } = req.body;
+		const { teacherId, title, className, notes } = req.body
 		const newNotes = new Notes({
 			teacherId: teacherId,
-			title : title,
-			className : className,
+			title: title,
+			className: className,
 			notes: notes,
 		})
 		await newNotes.save()
@@ -29,8 +29,19 @@ const createNotes = async (req, res) => {
 		throw error
 	}
 }
-const getNotesByClass = async (req,res) => {
-	
+
+const deleteNotes = async (req, res) => {
+	try {
+		const notesId = req.params.notesId
+		const deleteNote = await Notes.findByIdAndDelete(notesId)
+		res.json(deleteNote)
+	} catch (error) {
+		console.error("Error deleting notes:", error)
+		throw error
+	}
+}
+
+const getNotesByClass = async (req, res) => {
 	try {
 		let classs = req.params.class
 		const notes = await Notes.find({
@@ -43,9 +54,9 @@ const getNotesByClass = async (req,res) => {
 	}
 }
 
-
 module.exports = {
-    getNotesByTeacherId,
+	getNotesByTeacherId,
 	createNotes,
-	getNotesByClass
+	getNotesByClass,
+	deleteNotes,
 }

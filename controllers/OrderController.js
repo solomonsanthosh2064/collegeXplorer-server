@@ -100,6 +100,19 @@ const deleteOrder = async (req, res) => {
   }
 };
 
+const updateStatusOrder = async (req, res) => {
+  try {
+    const updatedOrder = await Order.findByIdAndUpdate(req.params.id, {
+      status: req.body.status,
+    });
+
+    // console.log("Updated order:", updatedOrder)
+    res.json(updatedOrder);
+  } catch (error) {
+    console.error("Error updating order:", error);
+  }
+}
+
 module.exports = {
   createOrder,
   getAllOrders,
@@ -107,4 +120,5 @@ module.exports = {
   getAllOrdersForUser,
   updateOrder,
   deleteOrder,
+  updateStatusOrder
 };
