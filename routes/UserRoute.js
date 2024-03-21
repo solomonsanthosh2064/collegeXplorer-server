@@ -9,6 +9,7 @@ const {
 	updateClassForUser,
 	deleteUser,
 	getUserByEmail,
+	updateUserImage,
 } = require("../controllers/UserController")
 
 // Create a new user
@@ -29,6 +30,9 @@ router.get("/user/registernumber/:registerNumber", getUserByRegisterNumber)
 
 // Update a user by ID
 router.put("/user/update/:id", updateUser)
+
+router.put("/user/updateimage/:id", updateUserImage)
+
 
 // Update a user for className
 router.put("/user/update/classname/:id", updateClassForUser)

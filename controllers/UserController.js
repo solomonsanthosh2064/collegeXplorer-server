@@ -101,6 +101,26 @@ const updateUser = async (req, res) => {
     throw error;
   }
 };
+const updateUserImage = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const { img } = req.body;
+    const updatedUser = await User.findByIdAndUpdate(
+      id,
+      {
+        userImage:img
+      },
+      {
+        new: true,
+      }
+    );
+    // console.log("Updated user:", updatedUser)
+    res.json(updatedUser);
+  } catch (error) {
+    console.error("Error updating user:", error);
+    throw error;
+  }
+};
 
 const updateClassForUser = async (req, res) => {
   try {
@@ -146,4 +166,5 @@ module.exports = {
   updateUser,
   updateClassForUser,
   deleteUser,
+  updateUserImage
 };
