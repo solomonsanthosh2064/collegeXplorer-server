@@ -42,12 +42,7 @@ const getAllAttendanceForSingleClassName = async (req, res) => {
         const endOfDay = new Date(currentDate);
         endOfDay.setHours(23, 59, 59, 999);
 
-        const attendance = await Attendance.find({
-            dateTime: {
-                $gte: startOfDay,
-                $lte: endOfDay
-            }
-        })
+        const attendance = await Attendance.find()
         .populate({
             path: 'user',
             match: { className: className }
